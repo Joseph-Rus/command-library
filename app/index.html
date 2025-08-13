@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta
+        http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'"
+    />
+    <meta
+        http-equiv="X-Content-Security-Policy"
+        content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'"
+    />
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="index.css">
+    <title>Command Library</title>
+    <style>
+        /* Draggable title bar styles */
+        .window-titlebar {
+            height: 32px;
+            background: rgba(255, 255, 255, 0.05);
+            -webkit-app-region: drag;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            position: relative;
+            z-index: 1000;
+        }
+
+        .window-titlebar .title {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+        
+        .status-dot {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+            opacity: 0.5;
+        }
+        
+        .status-dot.active {
+            background: var(--success-color, #4caf50);
+            opacity: 1;
+            transform: translateY(-50%) scale(1.2);
+            box-shadow: 0 0 8px rgba(76, 175, 80, 0.4);
+        }
+
+        /* Ensure all interactive elements are not draggable */
+        button, input, select, textarea, a, .modal, .modal-content {
+            -webkit-app-region: no-drag;
+        }
+
+        /* Adjust container to account for title bar */
+        .container {
+            height: calc(100vh - 32px);
+            overflow: hidden;
+        }
+
+        /* Make sure modals stay on top and are not draggable */
+        .modal {
+            -webkit-app-region: no-drag;
+            z-index: 2000;
+        }
+
+        .modal-content {
+            -webkit-app-region: no-drag;
+        }
+    </style>
+</head>
+<body>
+    <!-- Draggable title bar -->
+    <div class="window-titlebar">
+        <div class="title">Command Library</div>
+        <div class="status-dot" id="statusDot"></div>
+    </div>
+
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-content">
+            <div class="loading-spinner">
+                <i class="bi bi-terminal"></i>
+            </div>
+            <div class="loading-text">Loading Command Library...</div>
+        </div>
+    </div>
+
+    <div class="container" id="mainContainer" style="display: none;">
+        <!-- Header with settings and add button -->
+        <!-- <div class="header">
+            <div class="header-actions">
+                <button class="icon-btn" id="settingsBtn" title="Settings">
+                    <i class="bi bi-gear"></i>
+                </button>
+                <button class="icon-btn" id="addBtn" title="Add Command">
+                    <i class="bi bi-plus"></i>
+                </button>
+            </div>
+        </div> -->
+
+        <!-- Search Bar -->
+        <div class="search-container">
+            <div class="search-box">
+                <i class="bi bi-search search-icon"></i>
+                <input type="text" id="searchInput" placeholder="Search commands..." autocomplete="off" spellcheck="false">
+            </div>
+        </div>
+
+        <!-- Results Container -->
+        <div class="results-container" id="resultsContainer">
+            <div class="empty-state">
+                <i class="bi bi-terminal"></i>
+                <p>No commands found. Start typing to search or add a new command.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div class="modal" id="settingsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Settings</h3>
+                <button class="close-btn" id="closeSettings">
+                    <i class="bi bi-x"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="setting-group">
+                    <label><i class="bi bi-palette"></i> Appearance</label>
+                    <div class="setting-description">Choose your preferred color theme</div>
+                    <select id="themeSelect">
+                        <option value="dark">🌙 Dark Theme</option>
+                        <option value="light">☀️ Light Theme</option>
+                    </select>
+                </div>
+                
+                <!-- Hidden file input for import -->
+                <input type="file" id="importFile" accept=".json" style="display: none;">
+
+                <div class="setting-group">
+                    <label><i class="bi bi-droplet"></i> Transparency</label>
+                    <div class="setting-description">Customize the window transparency and blur effects</div>
+                    
+                    <div class="setting-item">
+                        <label for="blurRange">Blur Amount: <span id="blurValue">20px</span></label>
+                        <input type="range" id="blurRange" min="0" max="50" value="20" class="slider">
+                    </div>
+                    
+                    <div class="setting-item">
+                        <label for="windowOpacityRange">Opacity: <span id="windowOpacityValue">90%</span></label>
+                        <input type="range" id="windowOpacityRange" min="70" max="100" value="90" class="slider">
+                    </div>
+                    
+                    <div class="setting-item">
+                        <label for="tintColor">Background Tint</label>
+                        <div class="color-picker-container">
+                            <input type="color" id="tintColor" value="#000000" class="color-picker">
+                            <select id="tintPresets" class="tint-presets">
+                                <option value="#000000">Dark</option>
+                                <option value="#ffffff">Light</option>
+                                <option value="#0066cc">Blue</option>
+                                <option value="#6600cc">Purple</option>
+                                <option value="#cc0066">Pink</option>
+                                <option value="#00cc66">Green</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="setting-group">
+                    <label><i class="bi bi-keyboard"></i> Keyboard Shortcuts</label>
+                    <div class="setting-description">Available keyboard shortcuts for quick actions</div>
+                    
+                    <div class="hotkey-list">
+                        <div class="hotkey-item">
+                            <div class="hotkey-keys">
+                                <kbd>⌘K</kbd>
+                            </div>
+                            <div class="hotkey-action">Focus Search</div>
+                        </div>
+                        <div class="hotkey-item">
+                            <div class="hotkey-keys">
+                                <kbd>⌘N</kbd>
+                            </div>
+                            <div class="hotkey-action">Add New Command</div>
+                        </div>
+                        <div class="hotkey-item">
+                            <div class="hotkey-keys">
+                                <kbd>⌘,</kbd>
+                            </div>
+                            <div class="hotkey-action">Open Settings</div>
+                        </div>
+                        <div class="hotkey-item">
+                            <div class="hotkey-keys">
+                                <kbd>↑</kbd><kbd>↓</kbd>
+                            </div>
+                            <div class="hotkey-action">Navigate Commands</div>
+                        </div>
+                        <div class="hotkey-item">
+                            <div class="hotkey-keys">
+                                <kbd>Enter</kbd>
+                            </div>
+                            <div class="hotkey-action">Copy Selected Command</div>
+                        </div>
+                        <div class="hotkey-item">
+                            <div class="hotkey-keys">
+                                <kbd>Esc</kbd>
+                            </div>
+                            <div class="hotkey-action">Clear Search / Close Modal</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Command Modal -->
+    <div class="modal" id="addModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add Command</h3>
+                <button class="close-btn" id="closeAdd">
+                    <i class="bi bi-x"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="commandName">Name</label>
+                    <input type="text" id="commandName" placeholder="Command name">
+                </div>
+                <div class="form-group">
+                    <label for="commandValue">Command</label>
+                    <textarea id="commandValue" placeholder="Enter command or code snippet"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="commandDescription">Description (Optional)</label>
+                    <input type="text" id="commandDescription" placeholder="Brief description">
+                </div>
+                <div class="form-group">
+                    <label for="commandTags">Tags (Optional)</label>
+                    <input type="text" id="commandTags" placeholder="Separate tags with commas">
+                </div>
+                <div class="modal-actions">
+                    <button class="btn secondary" id="cancelAdd">Cancel</button>
+                    <button class="btn primary" id="saveCommand">Save Command</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

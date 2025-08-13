@@ -1,0 +1,122 @@
+[
+  {
+    "name": "Git Status",
+    "value": "git status",
+    "description": "Show the working tree status",
+    "tags": ["git", "status", "version-control"]
+  },
+  {
+    "name": "List Files Detailed",
+    "value": "ls -la",
+    "description": "List all files with detailed information including hidden files",
+    "tags": ["filesystem", "list", "unix"]
+  },
+  {
+    "name": "Docker Compose Up",
+    "value": "docker-compose up -d",
+    "description": "Start services in detached mode",
+    "tags": ["docker", "compose", "deployment"]
+  },
+  {
+    "name": "Create React Component",
+    "value": "import React from 'react';\n\nfunction ComponentName() {\n  return (\n    <div>\n      <h1>Hello World</h1>\n    </div>\n  );\n}\n\nexport default ComponentName;",
+    "description": "Basic React functional component template",
+    "tags": ["react", "javascript", "component", "template"]
+  },
+  {
+    "name": "Python HTTP Server",
+    "value": "python3 -m http.server 8000",
+    "description": "Start a simple HTTP server on port 8000",
+    "tags": ["python", "server", "development", "http"]
+  },
+  {
+    "name": "SSH Connection",
+    "value": "ssh username@hostname",
+    "description": "Connect to remote server via SSH",
+    "tags": ["ssh", "remote", "connection", "server"]
+  },
+  {
+    "name": "Find Large Files",
+    "value": "find . -type f -size +100M -exec ls -lh {} \\;",
+    "description": "Find files larger than 100MB in current directory",
+    "tags": ["find", "filesystem", "cleanup", "unix"]
+  },
+  {
+    "name": "MySQL Backup",
+    "value": "mysqldump -u username -p database_name > backup.sql",
+    "description": "Create a backup of MySQL database",
+    "tags": ["mysql", "database", "backup", "sql"]
+  },
+  {
+    "name": "NPM Install Dependencies",
+    "value": "npm install",
+    "description": "Install all dependencies from package.json",
+    "tags": ["npm", "nodejs", "dependencies", "javascript"]
+  },
+  {
+    "name": "Git Add All and Commit",
+    "value": "git add . && git commit -m \"commit message\"",
+    "description": "Stage all changes and commit with message",
+    "tags": ["git", "commit", "version-control"]
+  },
+  {
+    "name": "Check Disk Usage",
+    "value": "df -h",
+    "description": "Display filesystem disk space usage in human readable format",
+    "tags": ["disk", "storage", "system", "unix"]
+  },
+  {
+    "name": "Process List",
+    "value": "ps aux | grep process_name",
+    "description": "Find specific running processes",
+    "tags": ["process", "system", "monitoring", "unix"]
+  },
+  {
+    "name": "Nginx Restart",
+    "value": "sudo systemctl restart nginx",
+    "description": "Restart Nginx web server",
+    "tags": ["nginx", "server", "systemctl", "restart"]
+  },
+  {
+    "name": "Create Tar Archive",
+    "value": "tar -czf archive.tar.gz folder/",
+    "description": "Create compressed tar archive of a folder",
+    "tags": ["tar", "archive", "compression", "backup"]
+  },
+  {
+    "name": "CSS Flexbox Center",
+    "value": ".container {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  height: 100vh;\n}",
+    "description": "CSS to center content using flexbox",
+    "tags": ["css", "flexbox", "centering", "layout"]
+  },
+  {
+    "name": "JavaScript Fetch API",
+    "value": "fetch('https://api.example.com/data')\n  .then(response => response.json())\n  .then(data => console.log(data))\n  .catch(error => console.error('Error:', error));",
+    "description": "Basic fetch API request with error handling",
+    "tags": ["javascript", "fetch", "api", "http"]
+  },
+  {
+    "name": "Docker Remove All Containers",
+    "value": "docker rm $(docker ps -aq)",
+    "description": "Remove all Docker containers (stopped and running)",
+    "tags": ["docker", "cleanup", "containers"]
+  },
+  {
+    "name": "Git Branch and Checkout",
+    "value": "git checkout -b new-feature-branch",
+    "description": "Create and switch to a new git branch",
+    "tags": ["git", "branch", "checkout", "version-control"]
+  },
+  {
+    "name": "MongoDB Connection",
+    "value": "mongo mongodb://username:password@localhost:27017/database",
+    "description": "Connect to MongoDB database",
+    "tags": ["mongodb", "database", "connection", "nosql"]
+  },
+  {
+    "name": "Kill Process by Port",
+    "value": "lsof -ti:8547 | xargs kill -9",
+    "description": "Kill process running on port 8547",
+    "tags": ["process", "port", "kill", "network"]
+  }
+]

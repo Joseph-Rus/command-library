@@ -1,0 +1,70 @@
+{
+  "name": "command-library",
+  "version": "1.0.0",
+  "description": "Command Library - A powerful command snippet manager",
+  "productName": "Command Library",
+  "main": "main.js",
+  "scripts": {
+    "test": "run system",
+    "start": "electron .",
+    "build": "electron-builder",
+    "dist": "electron-builder --publish=never"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Joseph-Rus/command-library.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Joseph-Rus/command-library/issues"
+  },
+  "homepage": "https://github.com/Joseph-Rus/command-library#readme",
+  "devDependencies": {
+    "electron": "^37.2.6",
+    "electron-builder": "^26.0.12"
+  },
+  "dependencies": {
+    "@electron/remote": "^2.1.2",
+    "bootstrap-icons": "^1.13.1",
+    "i": "^0.3.7"
+  },
+  "build": {
+    "appId": "com.commandlibrary.app",
+    "productName": "Command Library",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "app/**/*",
+      "node_modules/**/*",
+      "icons/**/*"
+    ],
+    "mac": {
+      "icon": "icons/main.png",
+      "category": "public.app-category.developer-tools",
+      "target": [
+        {
+          "target": "dmg",
+          "arch": ["x64", "arm64"]
+        }
+      ]
+    },
+    "dmg": {
+      "title": "Command Library",
+      "contents": [
+        {
+          "x": 130,
+          "y": 220
+        },
+        {
+          "x": 410,
+          "y": 220,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    }
+  }
+}
