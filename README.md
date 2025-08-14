@@ -37,7 +37,7 @@ A powerful, native macOS command snippet manager built with Electron. This sleek
 
 <img width="865" height="585" alt="image" src="https://github.com/user-attachments/assets/c310570a-9706-465f-976a-89802cb82799" />
 
-- When the green dot lights up that mean that it is copied to clipboard
+- When the green dot lights up that means that it is copied to clipboard
 
 <img width="865" height="585" alt="image" src="https://github.com/user-attachments/assets/b56a260d-eff8-4c6f-a258-57d69a8858ec" />
 
