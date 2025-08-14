@@ -35,6 +35,12 @@ A powerful, native macOS command snippet manager built with Electron. This sleek
 - Compact, distraction-free design
 - Draggable title bar with status indicators
 
+<img width="939" height="713" alt="image" src="https://github.com/user-attachments/assets/33b24f30-f7fa-4152-8901-d4ea10b69236" />
+
+<img width="621" height="568" alt="image" src="https://github.com/user-attachments/assets/49bf1421-2e9f-4ba1-aea6-df2a35f00933" />
+
+
+
 ### Reliable Data Management
 - Local JSON storage in your user data directory
 - No cloud dependencies - your data stays private
@@ -235,3 +241,5 @@ For support, feature requests, or bug reports, please open an issue on GitHub.
 - Advanced search capabilities
 - Customizable interface
 - Import/export functionality
+
+
