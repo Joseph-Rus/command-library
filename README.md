@@ -35,9 +35,18 @@ A powerful, native macOS command snippet manager built with Electron. This sleek
 - Compact, distraction-free design
 - Draggable title bar with status indicators
 
-<img width="939" height="713" alt="image" src="https://github.com/user-attachments/assets/33b24f30-f7fa-4152-8901-d4ea10b69236" />
+<img width="865" height="585" alt="image" src="https://github.com/user-attachments/assets/c310570a-9706-465f-976a-89802cb82799" />
 
-<img width="621" height="568" alt="image" src="https://github.com/user-attachments/assets/49bf1421-2e9f-4ba1-aea6-df2a35f00933" />
+- When the green dot lights up that mean that it is copied to clipboard
+
+<img width="865" height="585" alt="image" src="https://github.com/user-attachments/assets/b56a260d-eff8-4c6f-a258-57d69a8858ec" />
+
+
+
+<img width="865" height="585" alt="image" src="https://github.com/user-attachments/assets/eebc64fb-85e4-4fb3-880f-d7c361e12a74" />
+
+
+
 
 
 
